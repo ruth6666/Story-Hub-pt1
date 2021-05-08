@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ToastAndroid, KeyboardAvoidingView } from 'react-native';
 import AppHeader from '../Components/AppHeader'
 import db from '../config'
 import firebase from 'firebase'
@@ -14,11 +14,13 @@ export default class WriteStory extends React.Component {
       author:this.state.Author,
     text:this.state.StoryText})
     this.setState({Title:'', Author:'', StoryText:''})
+    ToastAndroid.show('Your story has been submitted.',ToastAndroid.SHORT)
     }
 
     render(){
     return (
-      <View>
+
+      <KeyboardAvoidingView style={{backgroundColor:'lightblue', flex:1}} behaviour='padding'enabled>
         <AppHeader/>
         <TextInput style={{borderWidth:4, height:30, width:100}}
         placeholder = 'Title of your story'
@@ -42,7 +44,7 @@ export default class WriteStory extends React.Component {
         <TouchableOpacity style={{backgroundColor:'pink', width:200, height:50}} onPress={this.submitstory}>
             <Text style={{color:'blue', fontWeight:'bold'}}>Submit your story</Text>
         </TouchableOpacity>
-      </View>
+        </KeyboardAvoidingView>
     );
   }
   }
